@@ -2,13 +2,14 @@
 #define PUB_EXTERNALREFERENCE_HPP
 
 #include <string>
+#include <vector>
 
 namespace pub {
 
-class ExternalReference {
-public:
-	std::string name;
-	std::string address;
+struct ExternalReference {
+	std::string                    name;
+	std::string                    address;
+	std::vector<ExternalReference> domains_alternate;
 };
 
 } // namespace pub
