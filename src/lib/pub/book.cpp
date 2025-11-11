@@ -1,6 +1,8 @@
-#include <iostream>
-
 #include "book.hpp"
+#include "content.hpp"
+
+#include <fstream>
+#include <iostream>
 
 using namespace pub;
 
