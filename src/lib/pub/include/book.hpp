@@ -10,7 +10,6 @@
 
 namespace pub {
 
-
 class Book {
 public:
 	std::string title;
@@ -24,7 +23,6 @@ public:
 	std::vector<Profile> publishers;
 	Content content;
 };
-
 
 } // namespace pub
 

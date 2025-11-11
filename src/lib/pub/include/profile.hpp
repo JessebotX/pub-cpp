@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+namespace pub {
+
 class Profile {
 public:
 	std::string name;
@@ -12,5 +14,6 @@ public:
 	std::vector<ExternalReference> links_funding;
 };
 
+} // namespace pub
 
 #endif // PUB_PROFILE_HPP
