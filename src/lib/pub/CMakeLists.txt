@@ -1,5 +1,15 @@
 add_library(pub)
 
+CPMAddPackage(
+	NAME json
+	GIT_REPOSITORY https://github.com/nlohmann/json.git
+	GIT_TAG v3.12.0
+)
+
+target_link_libraries(pub
+	PUBLIC nlohmann_json::nlohmann_json
+)
+
 target_sources(pub
 	PRIVATE book.cpp
 )

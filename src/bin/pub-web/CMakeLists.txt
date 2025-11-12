@@ -5,3 +5,6 @@ target_sources(pub-web
 		main.cpp
 )
 
+target_link_libraries(pub-web
+	PUBLIC pub
+)
