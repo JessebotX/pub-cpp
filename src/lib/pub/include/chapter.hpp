@@ -1,24 +1,21 @@
-#ifndef PUB_BOOK_HPP
-#define PUB_BOOK_HPP
+#ifndef PUB_CHAPTER_HPP
+#define PUB_CHAPTER_HPP
 
-#include "chapter.hpp"
 #include "content.hpp"
-#include "copyright.hpp"
 #include "externalreference.hpp"
 #include "profile.hpp"
 
 #include <string>
-#include <unordered_map>
 #include <vector>
+#include <unordered_map>
 
 namespace pub {
 
-struct Book {
+struct Chapter {
 	std::string                                  unique_id;
 	std::string                                  title;
 	std::string                                  subtitle;
 	std::vector<std::string>                     titles_alternate;
-	std::string                                  edition;
 	std::vector<std::string>                     tags;
 	std::string                                  language_code;
 	std::vector<Profile>                         authors;
@@ -30,9 +27,8 @@ struct Book {
 	std::unordered_map<std::string, std::string> ids;
 	Content                                      content;
 	std::vector<Chapter>                         chapters;
-	Copyright                                    copyright;
 };
 
 } // namespace pub
 
-#endif // PUB_BOOK_H
+#endif // PUB_CHAPTER_HPP
