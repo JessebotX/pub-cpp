@@ -19,7 +19,6 @@ target_include_directories(pub
 )
 
 target_compile_features(pub
-	PUBLIC
-		cxx_std_20
+	PUBLIC cxx_std_20
 )
 

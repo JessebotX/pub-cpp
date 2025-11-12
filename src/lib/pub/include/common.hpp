@@ -1,6 +1,8 @@
 #ifndef PUB_COMMON_HPP
 #define PUB_COMMON_HPP
 
+#include <nlohmann/json.hpp>
+
 #include <string>
 
 namespace pub {
@@ -11,6 +13,7 @@ struct StrongAlias {
 };
 
 using FileName = StrongAlias<std::string, struct FileNameTag>;
+using JSON = nlohmann::json;
 
 } // namespace pub
 

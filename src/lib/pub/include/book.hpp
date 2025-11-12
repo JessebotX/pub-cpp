@@ -1,6 +1,7 @@
 #ifndef PUB_BOOK_HPP
 #define PUB_BOOK_HPP
 
+#include "common.hpp"
 #include "chapter.hpp"
 #include "content.hpp"
 #include "copyright.hpp"
@@ -13,24 +14,25 @@
 
 namespace pub {
 
-struct Book {
-	std::string                                  unique_id;
-	std::string                                  title;
-	std::string                                  subtitle;
-	std::vector<std::string>                     titles_alternate;
-	std::string                                  edition;
-	std::vector<std::string>                     tags;
-	std::string                                  language_code;
-	std::vector<Profile>                         authors;
-	std::vector<Profile>                         contributors;
-	std::vector<Profile>                         publishers;
-	std::vector<ExternalReference>               links_external;
-	std::vector<ExternalReference>               links_funding;
-	std::vector<ExternalReference>               links_mirrors;
-	std::unordered_map<std::string, std::string> ids;
-	Content                                      content;
-	std::vector<Chapter>                         chapters;
-	Copyright                                    copyright;
+class Book {
+private:
+	std::string                                  unique_id_;
+	std::string                                  title_;
+	std::string                                  subtitle_;
+	std::vector<std::string>                     titles_alternate_;
+	std::string                                  edition_;
+	std::vector<std::string>                     tags_;
+	std::string                                  language_code_;
+	std::vector<Profile>                         authors_;
+	std::vector<Profile>                         contributors_;
+	std::vector<Profile>                         publishers_;
+	std::vector<ExternalReference>               links_external_;
+	std::vector<ExternalReference>               links_funding_;
+	std::vector<ExternalReference>               links_mirrors_;
+	std::unordered_map<std::string, std::string> ids_;
+	Content                                      content_;
+	std::vector<Chapter>                         chapters_;
+	Copyright                                    copyright_;
 };
 
 } // namespace pub
