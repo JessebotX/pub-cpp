@@ -42,8 +42,13 @@ using IntOption = Option<IntValue>;
 
 class App {
 public:
-	App(int argc, char* argv[])
-	{}
+	enum class ParseError {
+		ArgumentMissing,
+	};
+
+	App(std::string_view name_)
+		: name{name_}
+		{}
 
 	IntOption&
 	add_int_option(std::vector<const char*> flag_names, IntValue value_default);
@@ -57,16 +62,21 @@ public:
 	StringOption&
 	add_string_option(std::vector<const char*> flag_names, StringValue value_default);
 
-	std::expected<std::monostate, std::string>
+	std::expected<std::monostate, ParseError>
 	parse(std::span<char*> program_args, std::size_t start_index = 1);
 
+	std::vector<std::string_view> get_pos_args() const noexcept
+	{
+		return this->pos_args;
+	}
 private:
-	std::vector<std::string_view> pos_args_;
+	std::string name;
 
-	std::vector<BoolOption> bool_options_;
-	std::vector<FloatOption> float_options_;
-	std::vector<IntOption> int_options_;
-	std::vector<StringOption> string_options_;
+	std::vector<std::string_view> pos_args;
+	std::vector<BoolOption> bool_options;
+	std::vector<FloatOption> float_options;
+	std::vector<IntOption> int_options;
+	std::vector<StringOption> string_options;
 };
 
 } // namespace cli
