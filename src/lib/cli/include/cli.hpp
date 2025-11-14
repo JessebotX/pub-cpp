@@ -18,12 +18,12 @@ using FloatValue = double;
 using StringValue = std::string;
 using BoolValue = bool;
 
-template <typename ValueType>
+template <typename T>
 struct Option {
 	std::vector<const char*> flag_names;
 	bool                     set;
-	ValueType                value;
-	ValueType                value_default;
+	T                        value;
+	T                        value_default;
 };
 
 template <>
@@ -42,7 +42,8 @@ using IntOption = Option<IntValue>;
 
 class App {
 public:
-	App(int argc, char* argv[]);
+	App(int argc, char* argv[])
+	{}
 
 	IntOption&
 	add_int_option(std::vector<const char*> flag_names, IntValue value_default);
@@ -60,7 +61,7 @@ public:
 	parse(std::span<char*> program_args, std::size_t start_index = 1);
 
 private:
-	std::vector<std::string_view> args_;
+	std::vector<std::string_view> pos_args_;
 
 	std::vector<BoolOption> bool_options_;
 	std::vector<FloatOption> float_options_;

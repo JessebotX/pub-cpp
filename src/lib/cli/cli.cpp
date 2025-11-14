@@ -2,11 +2,6 @@
 
 using namespace cli;
 
-App::App(int argc, char* argv[])
-{
-	args_ = std::vector<std::string_view>(argv, argv + argc);
-}
-
 BoolOption&
 App::add_bool_option(std::vector<const char*> flag_names_true, std::vector<const char*> flag_names_false, BoolValue value_default)
 {
@@ -65,15 +60,33 @@ App::parse(std::span<char*> program_args, std::size_t start_index)
 {
 	for (std::size_t i = start_index; i < program_args.size(); i++) {
 		char* curr = program_args[i];
+		auto is_flag_equal = [&](auto flag) -> bool {
+			return std::strcmp(curr, flag) == 0;
+		};
 
-		for (auto& opt : bool_options_) {
-			for (const auto& flag : opt.flag_names_true) {
-				if (std::strcmp(curr, flag) != 0) {
-					continue;
-				}
+		// boolean yes options
+		{
+			auto it = std::find_if(bool_options_.begin(), bool_options_.end(), [&](auto& opt) {
+				auto it = std::find_if(opt.flag_names_true.begin(), opt.flag_names_true.end(), is_flag_equal);
+				return it != opt.flag_names_true.end();
+			});
+			if (it != bool_options_.end()) {
+				it->set = true;
+				it->value = true;
+				continue;
+			}
+		}
 
-				opt.set = true;
-				opt.value = true;
+		// boolean no options
+		{
+			auto it = std::find_if(bool_options_.begin(), bool_options_.end(), [&](auto& opt) {
+				auto it = std::find_if(opt.flag_names_false.begin(), opt.flag_names_false.end(), is_flag_equal);
+				return it != opt.flag_names_false.end();
+			});
+			if (it != bool_options_.end()) {
+				it->set = true;
+				it->value = false;
+				continue;
 			}
 		}
 	}
