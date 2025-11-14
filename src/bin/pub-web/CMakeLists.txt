@@ -6,5 +6,7 @@ target_sources(pub-web
 )
 
 target_link_libraries(pub-web
-	PUBLIC pub
+	PUBLIC
+		pub
+		cli
 )
