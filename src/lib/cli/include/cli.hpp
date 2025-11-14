@@ -1,11 +1,14 @@
 #ifndef CLI_APP_HPP
 #define CLI_APP_HPP
 
+#include <cstring>
 #include <cstdint>
+#include <expected>
 #include <iostream>
 #include <span>
 #include <string>
 #include <string_view>
+#include <variant>
 #include <vector>
 
 namespace cli {
@@ -41,10 +44,21 @@ class App {
 public:
 	App(int argc, char* argv[]);
 
-	IntOption& add_int_option(std::vector<const char*> flag_names, IntValue value_default);
-	FloatOption& add_float_option(std::vector<const char*> flag_names, FloatValue value_default);
-	BoolOption& add_bool_option(std::vector<const char*> flag_names_true, std::vector<const char*> flag_names_false, BoolValue value_default);
-	StringOption& add_string_option(std::vector<const char*> flag_names, StringValue value_default);
+	IntOption&
+	add_int_option(std::vector<const char*> flag_names, IntValue value_default);
+
+	FloatOption&
+	add_float_option(std::vector<const char*> flag_names, FloatValue value_default);
+
+	BoolOption&
+	add_bool_option(std::vector<const char*> flag_names_true, std::vector<const char*> flag_names_false, BoolValue value_default);
+
+	StringOption&
+	add_string_option(std::vector<const char*> flag_names, StringValue value_default);
+
+	std::expected<std::monostate, std::string>
+	parse(std::span<char*> program_args, std::size_t start_index = 1);
+
 private:
 	std::vector<std::string_view> args_;
 

@@ -9,5 +9,5 @@ target_include_directories(cli
 )
 
 target_compile_features(cli
-	PUBLIC cxx_std_20
+	PUBLIC cxx_std_23
 )

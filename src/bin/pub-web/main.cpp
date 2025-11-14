@@ -10,6 +10,9 @@ main(int argc, char* argv[])
 
 	cli::BoolOption& flag_help = app.add_bool_option(std::vector{"-h"}, std::vector{"-no-h"}, false);
 
+	std::vector<char*> args(argv, argv + argc);
+	app.parse(args);
+
 	std::cout << "Hello, world!" << "\n" << "\n";
-	std::cout << "-h: " << flag_help.value_default << "\n";
+	std::cout << "-h: " << flag_help.value << "\n";
 }

@@ -60,3 +60,23 @@ App::add_int_option(std::vector<const char*> flag_names, IntValue value_default)
 	return int_options_.back();
 }
 
+std::expected<std::monostate, std::string>
+App::parse(std::span<char*> program_args, std::size_t start_index)
+{
+	for (std::size_t i = start_index; i < program_args.size(); i++) {
+		char* curr = program_args[i];
+
+		for (auto& opt : bool_options_) {
+			for (const auto& flag : opt.flag_names_true) {
+				if (std::strcmp(curr, flag) != 0) {
+					continue;
+				}
+
+				opt.set = true;
+				opt.value = true;
+			}
+		}
+	}
+
+	return std::monostate{};
+}
