@@ -11,9 +11,8 @@ main(int argc, char* argv[])
 	cli::BoolOption& flag_help = app.add_bool_option(std::vector{"-h"}, std::vector{"-no-h"}, false);
 	cli::StringOption& flag_str = app.add_string_option(std::vector{"-s", "--str"}, "hi");
 
-	std::vector<char*> args(argv, argv + argc);
-	auto a = app.parse(args);
-	if (!a.has_value()) {
+	auto parsed = app.parse(std::span<char*>(argv, argc));
+	if (!parsed.has_value()) {
 		std::cerr << "Error parsing" << std::endl;
 		std::exit(2);
 	}
